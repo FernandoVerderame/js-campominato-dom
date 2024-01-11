@@ -108,8 +108,18 @@ form.addEventListener('submit', function(event) {
             // Stampo il numero della cella cliccata
             console.log(i);
 
+
+            // Controllo se ha cliccato la bomba
+            const hasHitBomb = bombs.includes(i);
+
+
+            if (hasHitBomb) {
+                cell.classList.add('bomb');
+                console.log('Hai perso! Il tuo punteggio è: ' + score)
+            } else {
             // Incremento punteggio
             scoreDisplay.innerText = ++score;
+            }
 
         })
 

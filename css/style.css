@@ -76,6 +76,10 @@ main {
     background-color: blue;
 }
 
+#grid .cell.clicked.bomb {
+    background-color: red;
+}
+
 /* Footer */
 footer {
     height: 50px;
