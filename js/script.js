@@ -22,6 +22,7 @@ const createCell = content => {
     return newCell;
 }
 
+
 /**
  * Funzione per generare TOT bombe casuali, tutte diverse, nel range delle celle disponibili
  * @param {number} maxBombNumber Numero massimo da cui generare le bombe // 100 - 81 - 49
@@ -38,6 +39,21 @@ const generateBombs = (maxBombNumber, totalBombs) => {
 
     return bombs;
 }
+
+
+/**
+ * Funzione che gestisce il gameOver
+ * @param {number} score Il punteggio raggiunto
+ * @param {boolean} hasWon Per stabilire se l'utente ha vinto oppure ha perso
+ */
+const endGame = (score, hasWon = false) => {
+    const message = hasWon 
+        ? 'COMPLIMENTI! HAI VINTO!' 
+        : `Hai perso! Hai totalizzato ${score} punti.`;
+
+    alert(message);
+}
+
 
 // ! EFFETTIVO SVOLGIMENTO DEL PROGRAMMA
 // Creazione della griglia al click del bottone Play
@@ -118,16 +134,14 @@ form.addEventListener('submit', function(event) {
 
             if (hasHitBomb) {
                 cell.classList.add('bomb');
-                console.log('Hai perso! Il tuo punteggio è: ' + score);
-                isGameOver = true;
+                endGame(score, false);
             } else {
                 // Incremento punteggio
                 scoreDisplay.innerText = ++score;
 
                 // controllo se ha vinto
                 if (score === maxScore) {
-                    console.log('COMPLIMENTI! HAI VINTO!');
-                    isGameOver = true;
+                    endGame(score, true);
                 }
 
             }
