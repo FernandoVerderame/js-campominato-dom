@@ -1,0 +1,81 @@
+/* ? Generics */
+img {
+    max-width: 100%;
+    display: inline-block;
+}
+
+/* ? Utilities */
+
+
+/* Header */
+header img {
+    width: 80px;
+}
+
+header button {
+    padding: 0px 30px;
+    border-radius: 5px;
+    margin-right: 20px;
+}
+
+header select {
+    width: 150px;
+    height: 28px;
+    border-radius: 5px;
+    background-color: #F0F0F0;
+    border: 2px solid black;
+}
+
+header h1 {
+    font-weight: 700;
+}
+
+/* Main */
+main {
+    background-color: aquamarine;
+    height: calc(100vh - 130px);
+}
+
+/* GRID */
+#grid {
+    width: 700px;
+    height: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+#grid .cell {
+    cursor: pointer;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}
+
+#grid.easy .cell {
+    width: 10%;
+    height: 10%;
+}
+
+#grid.medium .cell {
+    width: calc(100% / 9);
+    height: calc(100% / 9);
+}
+
+#grid.hard .cell {
+    width: calc(100% / 7);
+    height: calc(100% / 7);
+}
+
+.cell.clicked {
+    background-color: blue;
+}
+
+/* Footer */
+footer {
+    height: 50px;
+}
