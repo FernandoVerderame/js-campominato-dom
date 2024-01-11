@@ -23,6 +23,11 @@ const createCell = content => {
 }
 
 
+// Funzione per generare TOT bombe casuali, tutte diverse, nel range delle celle disponibili
+const generateBombs = (maxBombNumber, totalBombs) => {
+    
+}
+
 // ! EFFETTIVO SVOLGIMENTO DEL PROGRAMMA
 // Creazione della griglia al click del bottone Play
 form.addEventListener('submit', function(event) {
@@ -62,6 +67,16 @@ form.addEventListener('submit', function(event) {
     // Preparo una variabile punteggio
     let score = 0;
     scoreDisplay.innerText = score;
+
+
+    // Preparo le informazioni per le bombe
+    const totalBombs = 16;
+
+    // Punteggio massimo 
+    const maxScore = totalCells - totalBombs;
+
+    // Generiamo le bombe
+    const bombs = generateBombs(totalCells, totalBombs);
 
 
     // Creazione ciclo for per ottenere la griglia
