@@ -22,10 +22,21 @@ const createCell = content => {
     return newCell;
 }
 
-
-// Funzione per generare TOT bombe casuali, tutte diverse, nel range delle celle disponibili
+/**
+ * Funzione per generare TOT bombe casuali, tutte diverse, nel range delle celle disponibili
+ * @param {number} maxBombNumber Numero massimo da cui generare le bombe // 100 - 81 - 49
+ * @param {number} totalBombs Numero totale di bombe da inserire nell'array // 16
+ * @returns Creazione delle bombe
+ */
 const generateBombs = (maxBombNumber, totalBombs) => {
-    
+    const bombs = [];    
+    while(bombs.length < totalBombs) {
+
+        const randomNumber = Math.floor(Math.random() * maxBombNumber) + 1;
+        if(!bombs.includes(randomNumber)) bombs.push(randomNumber);
+    }
+
+    return bombs;
 }
 
 // ! EFFETTIVO SVOLGIMENTO DEL PROGRAMMA
@@ -77,7 +88,7 @@ form.addEventListener('submit', function(event) {
 
     // Generiamo le bombe
     const bombs = generateBombs(totalCells, totalBombs);
-
+    console.log(bombs);
 
     // Creazione ciclo for per ottenere la griglia
     for (let i = 1; i <= totalCells; i++) {
