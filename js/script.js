@@ -5,7 +5,7 @@ const grid = document.getElementById('grid');
 const button = document.querySelector('button');
 const form = document.querySelector('form');
 const selectField = document.getElementById('difficoltà');
-
+const scoreDisplay = document.getElementById('score');
 
 
 
@@ -59,6 +59,10 @@ form.addEventListener('submit', function(event) {
     const totalCells = rows * cols;
 
 
+    // Preparo una variabile punteggio
+    let score = 0;
+    scoreDisplay.innerText = score;
+
 
     // Creazione ciclo for per ottenere la griglia
     for (let i = 1; i <= totalCells; i++) {
@@ -68,8 +72,19 @@ form.addEventListener('submit', function(event) {
 
         // Al click stampo in console il numero della cella, poi la coloriamo di azzurro
         cell.addEventListener('click', () => {
+
+            // ! Controllo se è stata già cliccata
+            if (cell.classList.contains('clicked')) return;
+
+            // Aggiungo la classe clicked
             cell.classList.add('clicked');
+
+            // Stampo il numero della cella cliccata
             console.log(i);
+
+            // Incremento punteggio
+            scoreDisplay.innerText = ++score;
+
         })
 
         // Aggiungo la cella in pagina
