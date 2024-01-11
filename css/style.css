@@ -71,7 +71,8 @@ main {
     height: calc(100% / 7);
 }
 
-.cell.clicked {
+#grid .cell.clicked {
+    cursor: not-allowed;
     background-color: blue;
 }
 
