@@ -30,7 +30,7 @@ const createCell = content => {
  */
 const generateBombs = (maxBombNumber, totalBombs) => {
     const bombs = [];    
-    while(bombs.length < totalBombs) {
+    while (bombs.length < totalBombs) {
 
         const randomNumber = Math.floor(Math.random() * maxBombNumber) + 1;
         if(!bombs.includes(randomNumber)) bombs.push(randomNumber);
@@ -44,6 +44,9 @@ const generateBombs = (maxBombNumber, totalBombs) => {
 form.addEventListener('submit', function(event) {
     // ! Impedisco il comportamento di default
     event.preventDefault();
+
+    // Preparo il flag
+    let isGameOver = false;
 
     // Cambio il testo del bottone
     button.innerText = 'Ricomincia';
@@ -100,7 +103,7 @@ form.addEventListener('submit', function(event) {
         cell.addEventListener('click', () => {
 
             // ! Controllo se è stata già cliccata
-            if (cell.classList.contains('clicked')) return;
+            if (isGameOver || cell.classList.contains('clicked')) return;
 
             // Aggiungo la classe clicked
             cell.classList.add('clicked');
@@ -115,10 +118,18 @@ form.addEventListener('submit', function(event) {
 
             if (hasHitBomb) {
                 cell.classList.add('bomb');
-                console.log('Hai perso! Il tuo punteggio è: ' + score)
+                console.log('Hai perso! Il tuo punteggio è: ' + score);
+                isGameOver = true;
             } else {
-            // Incremento punteggio
-            scoreDisplay.innerText = ++score;
+                // Incremento punteggio
+                scoreDisplay.innerText = ++score;
+
+                // controllo se ha vinto
+                if (score === maxScore) {
+                    console.log('COMPLIMENTI! HAI VINTO!');
+                    isGameOver = true;
+                }
+
             }
 
         })
