@@ -29,3 +29,14 @@ Aggiungere una select accanto al bottone di generazione, che fornisca una scelta
 #SUPER BONUS
 Quando l'utente clicca una bomba, scopriamo tutte le caselle del tabellone, colorando di rosso tutte le bombe
 Forza ragazzi!!!!
+
+
+
+
+## SCALETTA
+1. Creo un contatore per incrementare il punteggio
+2. Creo un array di 16 numeri casuali (bombe) 
+3. Al click di una cella verifico se l'utente ha calpestato una bomba
+4. Controllo se l'utente ha raggiunto il punteggio massimo e raccolgo il messaggio 
+5. Determino la fine della partita in base alla vittoria o alla sconfitta
+6. Stampo in pagina il punteggio raggiunto ed il messaggio adeguato
