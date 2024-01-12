@@ -7,7 +7,8 @@ const form = document.querySelector('form');
 const selectField = document.getElementById('difficoltà');
 const scoreDisplay = document.getElementById('score');
 
-
+    // Preparo il flag
+    let isGameOver = false;
 
 // ! FUNZIONI
 /**
@@ -52,6 +53,8 @@ const endGame = (score, hasWon = false) => {
         : `Hai perso! Hai totalizzato ${score} punti.`;
 
     alert(message);
+
+    isGameOver = true;
 }
 
 
@@ -61,8 +64,7 @@ form.addEventListener('submit', function(event) {
     // ! Impedisco il comportamento di default
     event.preventDefault();
 
-    // Preparo il flag
-    let isGameOver = false;
+    isGameOver = false;
 
     // Cambio il testo del bottone
     button.innerText = 'Ricomincia';
@@ -77,17 +79,21 @@ form.addEventListener('submit', function(event) {
     grid.classList.add(inputChoice);
 
     // Determino quante rows e quante cols voglio
-    let rows = 10;
-    let cols = 10;
+    let rows;
+    let cols;
 
     switch (inputChoice) {
-        case 'hard':
-            rows = 7;
-            cols = 7;
+        case 'easy':
+            rows = 10;
+            cols = 10;
             break;
         case 'medium':
             rows = 9;
             cols = 9;
+            break;
+        case 'hard':
+            rows = 7;
+            cols = 7;
             break;
     }
 
