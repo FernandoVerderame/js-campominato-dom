@@ -7,8 +7,8 @@ const form = document.querySelector('form');
 const selectField = document.getElementById('difficoltà');
 const scoreDisplay = document.getElementById('score');
 
-    // Preparo il flag
-    let isGameOver = false;
+// Preparo il flag
+let isGameOver = false;
 
 // ! FUNZIONI
 /**
@@ -23,7 +23,6 @@ const createCell = content => {
     return newCell;
 }
 
-
 /**
  * Funzione per generare TOT bombe casuali, tutte diverse, nel range delle celle disponibili
  * @param {number} maxBombNumber Numero massimo da cui generare le bombe // 100 - 81 - 49
@@ -31,16 +30,13 @@ const createCell = content => {
  * @returns Creazione delle bombe
  */
 const generateBombs = (maxBombNumber, totalBombs) => {
-    const bombs = [];    
+    const bombs = [];
     while (bombs.length < totalBombs) {
-
         const randomNumber = Math.floor(Math.random() * maxBombNumber) + 1;
-        if(!bombs.includes(randomNumber)) bombs.push(randomNumber);
+        if (!bombs.includes(randomNumber)) bombs.push(randomNumber);
     }
-
     return bombs;
 }
-
 
 /**
  * Funzione che gestisce il gameOver
@@ -48,23 +44,27 @@ const generateBombs = (maxBombNumber, totalBombs) => {
  * @param {boolean} hasWon Per stabilire se l'utente ha vinto oppure ha perso
  */
 const endGame = (score, hasWon = false) => {
-    const message = hasWon 
-        ? 'COMPLIMENTI! HAI VINTO!' 
+    const message = hasWon
+        ? 'COMPLIMENTI! HAI VINTO!'
         : `Hai perso! Hai totalizzato ${score} punti.`;
 
     alert(message);
-
     isGameOver = true;
 }
 
-
 // ! EFFETTIVO SVOLGIMENTO DEL PROGRAMMA
 // Creazione della griglia al click del bottone Play
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', function (event) {
     // ! Impedisco il comportamento di default
     event.preventDefault();
 
+    // Reset dello stato
     isGameOver = false;
+    let score = 0;
+    scoreDisplay.innerText = score;
+
+    // Reset delle classi della griglia
+    grid.className = '';
 
     // Cambio il testo del bottone
     button.innerText = 'Ricomincia';
@@ -72,21 +72,15 @@ form.addEventListener('submit', function(event) {
     // Svuota la griglia
     grid.innerText = '';
 
-    //Recuperiamo il valore
+    // Recuperiamo il valore della difficoltà
     const inputChoice = selectField.value;
 
     // Assegno la classe alla griglia
     grid.classList.add(inputChoice);
 
     // Determino quante rows e quante cols voglio
-    let rows;
-    let cols;
-
+    let rows, cols;
     switch (inputChoice) {
-        case 'easy':
-            rows = 10;
-            cols = 10;
-            break;
         case 'medium':
             rows = 9;
             cols = 9;
@@ -95,15 +89,13 @@ form.addEventListener('submit', function(event) {
             rows = 7;
             cols = 7;
             break;
+        case 'easy':
+            rows = 10;
+            cols = 10;
+            break;
     }
 
     const totalCells = rows * cols;
-
-
-    // Preparo una variabile punteggio
-    let score = 0;
-    scoreDisplay.innerText = score;
-
 
     // Preparo le informazioni per le bombe
     const totalBombs = 16;
@@ -117,13 +109,11 @@ form.addEventListener('submit', function(event) {
 
     // Creazione ciclo for per ottenere la griglia
     for (let i = 1; i <= totalCells; i++) {
-
         // Creare una cella
         const cell = createCell(i);
 
         // Al click stampo in console il numero della cella, poi la coloriamo di azzurro
         cell.addEventListener('click', () => {
-
             // ! Controllo se è stata già cliccata
             if (isGameOver || cell.classList.contains('clicked')) return;
 
@@ -133,10 +123,8 @@ form.addEventListener('submit', function(event) {
             // Stampo il numero della cella cliccata
             console.log(i);
 
-
             // Controllo se ha cliccato la bomba
             const hasHitBomb = bombs.includes(i);
-
 
             if (hasHitBomb) {
                 cell.classList.add('bomb');
@@ -149,12 +137,10 @@ form.addEventListener('submit', function(event) {
                 if (score === maxScore) {
                     endGame(score, true);
                 }
-
             }
-
-        })
+        });
 
         // Aggiungo la cella in pagina
         grid.appendChild(cell);
     }
-})
+});
