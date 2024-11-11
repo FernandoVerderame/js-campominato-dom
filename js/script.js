@@ -7,8 +7,8 @@ const form = document.querySelector('form');
 const selectField = document.getElementById('difficoltà');
 const scoreDisplay = document.getElementById('score');
 
-    // Preparo il flag
-    let isGameOver = false;
+// Preparo il flag
+let isGameOver = false;
 
 // ! FUNZIONI
 /**
@@ -31,11 +31,11 @@ const createCell = content => {
  * @returns Creazione delle bombe
  */
 const generateBombs = (maxBombNumber, totalBombs) => {
-    const bombs = [];    
+    const bombs = [];
     while (bombs.length < totalBombs) {
 
         const randomNumber = Math.floor(Math.random() * maxBombNumber) + 1;
-        if(!bombs.includes(randomNumber)) bombs.push(randomNumber);
+        if (!bombs.includes(randomNumber)) bombs.push(randomNumber);
     }
 
     return bombs;
@@ -48,8 +48,8 @@ const generateBombs = (maxBombNumber, totalBombs) => {
  * @param {boolean} hasWon Per stabilire se l'utente ha vinto oppure ha perso
  */
 const endGame = (score, hasWon = false) => {
-    const message = hasWon 
-        ? 'COMPLIMENTI! HAI VINTO!' 
+    const message = hasWon
+        ? 'COMPLIMENTI! HAI VINTO!'
         : `Hai perso! Hai totalizzato ${score} punti.`;
 
     alert(message);
@@ -60,7 +60,7 @@ const endGame = (score, hasWon = false) => {
 
 // ! EFFETTIVO SVOLGIMENTO DEL PROGRAMMA
 // Creazione della griglia al click del bottone Play
-form.addEventListener('submit', function(event) {
+form.addEventListener('submit', function (event) {
     // ! Impedisco il comportamento di default
     event.preventDefault();
 
@@ -75,6 +75,9 @@ form.addEventListener('submit', function(event) {
     //Recuperiamo il valore
     const inputChoice = selectField.value;
 
+    // Rimuovo la classe della difficoltà precedente, se presente
+    grid.classList.remove('easy', 'medium', 'hard');
+
     // Assegno la classe alla griglia
     grid.classList.add(inputChoice);
 
@@ -83,10 +86,6 @@ form.addEventListener('submit', function(event) {
     let cols;
 
     switch (inputChoice) {
-        case 'easy':
-            rows = 10;
-            cols = 10;
-            break;
         case 'medium':
             rows = 9;
             cols = 9;
@@ -94,6 +93,10 @@ form.addEventListener('submit', function(event) {
         case 'hard':
             rows = 7;
             cols = 7;
+            break;
+        case 'easy':
+            rows = 10;
+            cols = 10;
             break;
     }
 
